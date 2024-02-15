@@ -1,10 +1,16 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+</script>
 
 <template>
   <div>
-    <h1>我是app根组件</h1>
-    <h1>我新增一个标题</h1>
+    <h1>测试代码</h1>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped lang="scss">
+div{
+  h1{
+    color:red;
+  }
+}
+</style>
