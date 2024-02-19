@@ -1,11 +1,10 @@
 <script setup lang="ts">
+import { User, Lock } from "@element-plus/icons-vue";
+import { reactive, ref } from "vue";
 
-import {User, Lock} from "@element-plus/icons-vue";
-import {reactive, ref} from "vue";
+import { useRouter } from "vue-router";
 
-import {useRouter} from "vue-router";
-
-import {ElNotification} from "element-plus";
+import { ElNotification } from "element-plus";
 //获取路由器
 let $router = useRouter();
 //引入用户相关的小仓库
@@ -13,12 +12,12 @@ import useUserStore from "@/store/modules/user.ts";
 
 const userStore = useUserStore();
 
-let loginForm = reactive({username: 'admin', password: '111111'})
+let loginForm = reactive({ username: "admin", password: "111111" });
 
-let loading = ref(false)
+let loading = ref(false);
 
 async function login() {
-  loading.value = true
+  loading.value = true;
   //通知仓库发登录请求
   //请求成功跳转到首页
   //请求失败弹出对应的登陆失败信息
@@ -26,30 +25,32 @@ async function login() {
     //保证登录成功
     await userStore.userLogin(loginForm);
     ElNotification({
-      type: 'success',
-      message: '登录成功'
-    })
+      type: "success",
+      message: "登录成功",
+    });
     //编程式导航跳转至展示数据首页
-    await $router.push('/')
+    await $router.push("/");
     loading.value = false;
   } catch (error) {
     loading.value = false;
     ElNotification({
-      type: 'error',
-      message: (error as Error).message
-    })
+      type: "error",
+      message: (error as Error).message,
+    });
   }
 }
 </script>
 
 <template>
-  <div style="
-  position : absolute;
-  width: 100%;
-  height: 100%;
-  background: #e7ebf0 no-repeat;
-  padding: 75px;
-">
+  <div
+    style="
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: #e7ebf0 no-repeat;
+      padding: 75px;
+    "
+  >
     <div class="login_container">
       <el-row>
         <el-col :span="3" :xs="0"></el-col>
@@ -58,29 +59,40 @@ async function login() {
             <h1>Hello</h1>
             <h2>欢迎来到熊二甄选</h2>
             <el-form-item>
-              <el-input :prefix-icon="User" v-model="loginForm.username" placeholder="UserName"></el-input>
+              <el-input
+                :prefix-icon="User"
+                v-model="loginForm.username"
+                placeholder="UserName"
+              ></el-input>
             </el-form-item>
             <el-form-item>
-              <el-input type="password" :prefix-icon="Lock" v-model="loginForm.password" show-password
-                        placeholder="Password"></el-input>
+              <el-input
+                type="password"
+                :prefix-icon="Lock"
+                v-model="loginForm.password"
+                show-password
+                placeholder="Password"
+              ></el-input>
             </el-form-item>
             <el-form-item>
-              <el-button :loading="loading" type="primary" size="default" class="login_btn" @click="login">Login
+              <el-button
+                :loading="loading"
+                type="primary"
+                size="default"
+                class="login_btn"
+                @click="login"
+                >Login
               </el-button>
             </el-form-item>
           </el-form>
         </el-col>
         <el-col :span="9" :xs="0">
           <el-carousel height="330px" class="login_carousel">
-            <el-carousel-item v-for="item in 4" :key="item">
-
-            </el-carousel-item>
+            <el-carousel-item v-for="item in 4" :key="item"> </el-carousel-item>
           </el-carousel>
         </el-col>
-        <el-col :span="3" :xs="0">
-        </el-col>
+        <el-col :span="3" :xs="0"> </el-col>
       </el-row>
-
     </div>
   </div>
 </template>
@@ -107,7 +119,7 @@ async function login() {
 }
 
 h1 {
-  color: #26333C;
+  color: #26333c;
   font-size: 40px;
 }
 
