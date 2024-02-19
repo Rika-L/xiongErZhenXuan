@@ -1,16 +1,13 @@
 <script setup lang="ts">
+
 </script>
 
 <template>
   <div>
-    <h1>测试代码</h1>
+    <router-view></router-view>
   </div>
 </template>
 
 <style scoped lang="scss">
-div{
-  h1{
-    color:red;
-  }
-}
+
 </style>
