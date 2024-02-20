@@ -1,22 +1,80 @@
 <script setup lang="ts">
-import { User, Lock } from "@element-plus/icons-vue";
-import { reactive, ref } from "vue";
+import {User, Lock} from "@element-plus/icons-vue";
+import {reactive, ref} from "vue";
 
-import { useRouter } from "vue-router";
+import {useRouter} from "vue-router";
 
-import { ElNotification } from "element-plus";
+import {ElNotification} from "element-plus";
 //获取路由器
 let $router = useRouter();
 //引入用户相关的小仓库
 import useUserStore from "@/store/modules/user.ts";
 
+//引入获取当前时间的函数
+import {getTime} from "@/utils/time.ts";
+
 const userStore = useUserStore();
 
-let loginForm = reactive({ username: "admin", password: "111111" });
+let loginForm = reactive({username: "admin", password: "111111"});
 
 let loading = ref(false);
 
+//获取el-form组件
+let loginForms = ref();
+
+const validatorUserName = (rule: any, value: any, callback: any) => {
+  //rule为校验规则对象
+  //value为表单文本的内容
+  //callback函数,如果符合条件,通过callback放行
+  //如果不符合条件,注入错误信息
+  if (value.length >= 5) {
+    callback();
+  } else {
+    callback(new Error('账号长度至少五位'))
+  }
+}
+
+const validatorPassword = (rule: any, value: any, callback: any) => {
+  //rule为校验规则对象
+  //value为表单文本的内容
+  //callback函数,如果符合条件,通过callback放行
+  //如果不符合条件,注入错误信息
+  if (value.length >= 5) {
+    callback();
+  } else {
+    callback(new Error('密码长度至少五位'))
+  }
+}
+
+//定义表单校验需要的配置对象
+const rules = {
+  username: [
+    // {
+    //   required: true,
+    //   min: 3,
+    //   max: 10,
+    //   message: '账号长度至少三位,至多十位',
+    //   trigger: 'change'
+    // },
+    {
+      trigger: 'change',
+      validator: validatorUserName
+    }
+  ],
+  password: [
+    {
+      trigger: 'change',
+      validator: validatorPassword
+    }
+  ]
+}
+
+
 async function login() {
+  //保证全部表单校验通过后发请求
+  await loginForms.value.validate();
+
+
   loading.value = true;
   //通知仓库发登录请求
   //请求成功跳转到首页
@@ -26,7 +84,8 @@ async function login() {
     await userStore.userLogin(loginForm);
     ElNotification({
       type: "success",
-      message: "登录成功",
+      title: `HI,${getTime()}好`,
+      message: "欢迎回来",
     });
     //编程式导航跳转至展示数据首页
     await $router.push("/");
@@ -39,11 +98,13 @@ async function login() {
     });
   }
 }
+
+
 </script>
 
 <template>
   <div
-    style="
+      style="
       position: absolute;
       width: 100%;
       height: 100%;
@@ -55,43 +116,43 @@ async function login() {
       <el-row>
         <el-col :span="3" :xs="0"></el-col>
         <el-col :span="9" :xs="24">
-          <el-form class="login_form">
+          <el-form class="login_form" :model="loginForm" :rules="rules" ref="loginForms">
             <h1>Hello</h1>
             <h2>欢迎来到熊二甄选</h2>
-            <el-form-item>
+            <el-form-item prop="username">
               <el-input
-                :prefix-icon="User"
-                v-model="loginForm.username"
-                placeholder="UserName"
+                  :prefix-icon="User"
+                  v-model="loginForm.username"
+                  placeholder="UserName"
               ></el-input>
             </el-form-item>
-            <el-form-item>
+            <el-form-item prop="password">
               <el-input
-                type="password"
-                :prefix-icon="Lock"
-                v-model="loginForm.password"
-                show-password
-                placeholder="Password"
+                  type="password"
+                  :prefix-icon="Lock"
+                  v-model="loginForm.password"
+                  show-password
+                  placeholder="Password"
               ></el-input>
             </el-form-item>
             <el-form-item>
               <el-button
-                :loading="loading"
-                type="primary"
-                size="default"
-                class="login_btn"
-                @click="login"
-                >Login
+                  :loading="loading"
+                  type="primary"
+                  size="default"
+                  class="login_btn"
+                  @click="login"
+              >Login
               </el-button>
             </el-form-item>
           </el-form>
         </el-col>
         <el-col :span="9" :xs="0">
           <el-carousel height="330px" class="login_carousel">
-            <el-carousel-item v-for="item in 4" :key="item"> </el-carousel-item>
+            <el-carousel-item v-for="item in 4" :key="item"></el-carousel-item>
           </el-carousel>
         </el-col>
-        <el-col :span="3" :xs="0"> </el-col>
+        <el-col :span="3" :xs="0"></el-col>
       </el-row>
     </div>
   </div>
