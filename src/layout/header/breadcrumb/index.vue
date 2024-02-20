@@ -1,13 +1,12 @@
 <script setup lang="ts">
-
-import {ArrowRight} from "@element-plus/icons-vue";
+import { ArrowRight } from "@element-plus/icons-vue";
 </script>
 
 <template>
   <div class="header_left">
     <!--    顶部左侧静态-->
     <el-icon style="margin-right: 10px">
-      <Expand/>
+      <Expand />
     </el-icon>
     <!--        左侧面包屑-->
     <el-breadcrumb :separator-icon="ArrowRight">

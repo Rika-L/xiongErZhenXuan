@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import Logo from '@/layout/logo/index.vue'
-import Menu from '@/layout/menu/index.vue'
-import Main from '@/layout/main/index.vue'
-import Header from '@/layout/header/index.vue'
-import {useRoute} from "vue-router";
+import Logo from "@/layout/logo/index.vue";
+import Menu from "@/layout/menu/index.vue";
+import Main from "@/layout/main/index.vue";
+import Header from "@/layout/header/index.vue";
+import { useRoute } from "vue-router";
 
 let $route = useRoute();
 //获取用户相关的小仓库
@@ -16,25 +16,28 @@ let userStore = useUserStore();
   <div class="layout_container">
     <!--    左侧菜单-->
     <div class="layout_slider">
-      <Logo/>
+      <Logo />
       <el-scrollbar class="scrollbar">
-        <el-menu background-color="$base-menu-background" text-color="white" active-text-color="#004080"
-                 :default-active="$route.path">
+        <el-menu
+          background-color="$base-menu-background"
+          text-color="white"
+          active-text-color="#004080"
+          :default-active="$route.path"
+        >
           <!--          根据路由动态生成菜单-->
-          <Menu :menuList="userStore.menuRoutes"/>
+          <Menu :menuList="userStore.menuRoutes" />
         </el-menu>
       </el-scrollbar>
     </div>
     <!--    顶部导航-->
     <div class="layout_header">
-      <Header/>
+      <Header />
     </div>
     <!--    内容展示-->
     <div class="layout_main">
-      <Main/>
+      <Main />
     </div>
   </div>
-
 </template>
 
 <style scoped lang="scss">

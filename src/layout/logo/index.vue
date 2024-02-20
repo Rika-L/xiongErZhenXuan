@@ -5,8 +5,8 @@ import setting from "@/setting.ts";
 
 <template>
   <div class="logo">
-    <img :src="setting.logo" alt="" v-show="setting.logoHidden">
-    <p>{{setting.title}}</p>
+    <img :src="setting.logo" alt="" v-show="setting.logoHidden" />
+    <p>{{ setting.title }}</p>
   </div>
 </template>
 
@@ -18,13 +18,12 @@ import setting from "@/setting.ts";
   display: flex;
   align-items: center;
   padding: 20px;
-  img{
+  img {
     width: 40px;
   }
-  p{
+  p {
     font-size: $base-logo-title-fontSize;
     margin-left: 10px;
   }
 }
-
 </style>

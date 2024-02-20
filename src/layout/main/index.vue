@@ -1,12 +1,10 @@
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <router-view v-slot="{ Component }">
     <transition name="fade">
       <!--      渲染layout一级路由组件的子路由-->
-      <component :is="Component"/>
+      <component :is="Component" />
     </transition>
   </router-view>
 </template>

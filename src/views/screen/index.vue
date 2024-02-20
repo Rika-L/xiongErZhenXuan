@@ -1,11 +1,7 @@
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
 
 <template>
-<h1>我是数据大屏一级路由组件</h1>
+  <h1>我是数据大屏一级路由组件</h1>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
