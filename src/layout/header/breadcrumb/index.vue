@@ -1,18 +1,39 @@
 <script setup lang="ts">
-import { ArrowRight } from "@element-plus/icons-vue";
+import {ArrowRight} from "@element-plus/icons-vue";
+import useLayoutSettingStore from "@/store/modules/setting.ts";
+import {useRoute} from "vue-router";
+//获取layout配置相关的仓库
+let LayoutSettingStore = useLayoutSettingStore();
+
+let $route = useRoute();
+
+const changeIcon = () => {
+  LayoutSettingStore.fold = !LayoutSettingStore.fold
+}
+
+</script>
+
+<script lang="ts">
+export default {
+  name: 'breadcrumb'
+}
 </script>
 
 <template>
   <div class="header_left">
     <!--    顶部左侧静态-->
-    <el-icon style="margin-right: 10px">
-      <Expand />
+    <el-icon style="margin-right: 10px" @click="changeIcon">
+      <component :is="LayoutSettingStore.fold?'Fold':'Expand'">
+      </component>
     </el-icon>
     <!--        左侧面包屑-->
     <el-breadcrumb :separator-icon="ArrowRight">
-      <el-breadcrumb-item :to="{ path: '/' }">权限管理</el-breadcrumb-item>
-      <el-breadcrumb-item>
-        <a href="/">用户管理</a>
+      <el-breadcrumb-item v-for="(item,index) in $route.matched" :key="index" v-show="item.meta.title" :to="item.path">
+        <!--        面包屑展示匹配路由的标题-->
+        <el-icon style="margin: 0 2px">
+          <component :is="item.meta.icon"></component>
+        </el-icon>
+        <span>{{ item.meta.title }}</span>
       </el-breadcrumb-item>
     </el-breadcrumb>
   </div>
