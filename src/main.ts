@@ -1,4 +1,4 @@
-import {createApp} from "vue";
+import { createApp } from "vue";
 import App from "@/App.vue";
 
 //引入element-Plus插件与样式
@@ -12,7 +12,7 @@ const app = createApp(App);
 
 //安装插件
 app.use(ElementPlus, {
-    locale: zhCn,
+  locale: zhCn,
 });
 
 //svg插件需要的配置
@@ -38,7 +38,7 @@ import pinia from "@/store";
 app.use(pinia);
 
 //引入路由鉴权文件
-import './permisstion.ts';
+import "./permisstion.ts";
 
 //挂载
 app.mount("#app");

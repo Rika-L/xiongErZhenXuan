@@ -10,5 +10,5 @@ export const GET_TOKEN = () => {
 
 //本地存储数据删除的方法
 export const REMOVE_TOKEN = () => {
-  localStorage.removeItem('TOKEN');
-}
+  localStorage.removeItem("TOKEN");
+};

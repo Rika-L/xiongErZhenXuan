@@ -5,8 +5,8 @@ import Setting from "./setting/index.vue";
 
 <script lang="ts">
 export default {
-  name:'Header'
-}
+  name: "Header",
+};
 </script>
 
 <template>

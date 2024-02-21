@@ -7,8 +7,8 @@ let LayoutSettingStore = useLayoutSettingStore();
 
 <script lang="ts">
 export default {
-  name:'Logo'
-}
+  name: "Logo",
+};
 </script>
 
 <template>

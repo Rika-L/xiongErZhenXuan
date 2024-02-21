@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import {User, Lock} from "@element-plus/icons-vue";
-import {reactive, ref} from "vue";
+import { User, Lock } from "@element-plus/icons-vue";
+import { reactive, ref } from "vue";
 
-import {useRoute, useRouter} from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
-import {ElNotification} from "element-plus";
-
+import { ElNotification } from "element-plus";
 
 //获取路由器
 let $router = useRouter();
@@ -16,11 +15,11 @@ let $route = useRoute();
 import useUserStore from "@/store/modules/user.ts";
 
 //引入获取当前时间的函数
-import {getTime} from "@/utils/time.ts";
+import { getTime } from "@/utils/time.ts";
 
 const userStore = useUserStore();
 
-let loginForm = reactive({username: "admin", password: "111111"});
+let loginForm = reactive({ username: "admin", password: "111111" });
 
 let loading = ref(false);
 
@@ -93,7 +92,7 @@ async function login() {
     //编程式导航跳转至展示数据首页
     //判断登录的时候是否有query参数
     let redirect: any = $route.query.redirect;
-    await $router.push({path: redirect || '/'});
+    await $router.push({ path: redirect || "/" });
     loading.value = false;
   } catch (error) {
     loading.value = false;
@@ -107,7 +106,7 @@ async function login() {
 
 <template>
   <div
-      style="
+    style="
       position: absolute;
       width: 100%;
       height: 100%;
@@ -120,37 +119,37 @@ async function login() {
         <el-col :span="3" :xs="0"></el-col>
         <el-col :span="9" :xs="24">
           <el-form
-              class="login_form"
-              :model="loginForm"
-              :rules="rules"
-              ref="loginForms"
+            class="login_form"
+            :model="loginForm"
+            :rules="rules"
+            ref="loginForms"
           >
             <h1>Hello</h1>
             <h2>欢迎来到熊二甄选</h2>
             <el-form-item prop="username">
               <el-input
-                  :prefix-icon="User"
-                  v-model="loginForm.username"
-                  placeholder="UserName"
+                :prefix-icon="User"
+                v-model="loginForm.username"
+                placeholder="UserName"
               ></el-input>
             </el-form-item>
             <el-form-item prop="password">
               <el-input
-                  type="password"
-                  :prefix-icon="Lock"
-                  v-model="loginForm.password"
-                  show-password
-                  placeholder="Password"
+                type="password"
+                :prefix-icon="Lock"
+                v-model="loginForm.password"
+                show-password
+                placeholder="Password"
               ></el-input>
             </el-form-item>
             <el-form-item>
               <el-button
-                  :loading="loading"
-                  type="primary"
-                  size="default"
-                  class="login_btn"
-                  @click="login"
-              >Login
+                :loading="loading"
+                type="primary"
+                size="default"
+                class="login_btn"
+                @click="login"
+                >Login
               </el-button>
             </el-form-item>
           </el-form>

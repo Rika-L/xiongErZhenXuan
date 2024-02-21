@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import {FullScreen, Refresh, Setting} from "@element-plus/icons-vue";
+import { FullScreen, Refresh, Setting } from "@element-plus/icons-vue";
 import useLayoutSettingStore from "@/store/modules/setting.ts";
 import useUserStore from "@/store/modules/user.ts";
-import {useRoute, useRouter} from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 let $router = useRouter();
 let $route = useRoute();
@@ -12,8 +12,8 @@ let userStore = useUserStore();
 
 //刷新按钮点击回调
 const updateRefresh = () => {
-  layoutSettingStore.refresh = !layoutSettingStore.refresh
-}
+  layoutSettingStore.refresh = !layoutSettingStore.refresh;
+};
 
 //全屏点击回调
 const fullScreen = () => {
@@ -24,7 +24,7 @@ const fullScreen = () => {
   } else {
     document.exitFullscreen();
   }
-}
+};
 
 //退出登录回调
 const logout = async () => {
@@ -33,31 +33,41 @@ const logout = async () => {
   //跳转到登陆页面
   await userStore.userLogout();
   //跳转登录页面
-  await $router.push({path: '/login', query: {redirect: $route.path}})
-}
+  await $router.push({ path: "/login", query: { redirect: $route.path } });
+};
 </script>
 
 <script lang="ts">
 export default {
-  name: 'Setting'
-}
+  name: "Setting",
+};
 </script>
 
 <template>
   <div class="header_right">
-    <el-button size="small" :icon="Refresh" circle @click="updateRefresh"></el-button>
-    <el-button size="small" :icon="FullScreen" circle @click="fullScreen"></el-button>
+    <el-button
+      size="small"
+      :icon="Refresh"
+      circle
+      @click="updateRefresh"
+    ></el-button>
+    <el-button
+      size="small"
+      :icon="FullScreen"
+      circle
+      @click="fullScreen"
+    ></el-button>
     <el-button size="small" :icon="Setting" circle></el-button>
     <img
-        :src="userStore.avatar"
-        alt=""
-        style="width: 24px; height: 24px; margin: 0 10px;border-radius: 50%"
+      :src="userStore.avatar"
+      alt=""
+      style="width: 24px; height: 24px; margin: 0 10px; border-radius: 50%"
     />
     <el-dropdown>
       <span class="el-dropdown-link">
         {{ userStore.username }}
         <el-icon class="el-icon--right">
-          <arrow-down/>
+          <arrow-down />
         </el-icon>
       </span>
       <template #dropdown>

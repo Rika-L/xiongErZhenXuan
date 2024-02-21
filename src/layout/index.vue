@@ -3,13 +3,12 @@ import Logo from "@/layout/logo/index.vue";
 import Menu from "@/layout/menu/index.vue";
 import Main from "@/layout/main/index.vue";
 import Header from "@/layout/header/index.vue";
-import {useRoute} from "vue-router";
+import { useRoute } from "vue-router";
 import useUserStore from "@/store/modules/user.ts";
 import useLayoutSettingStore from "@/store/modules/setting.ts";
 
 let $route = useRoute();
 //获取用户相关的小仓库
-
 
 let userStore = useUserStore();
 let LayoutSettingStore = useLayoutSettingStore();
@@ -17,36 +16,35 @@ let LayoutSettingStore = useLayoutSettingStore();
 
 <script lang="ts">
 export default {
-  name: 'Layout'
-}
+  name: "Layout",
+};
 </script>
 
 <template>
   <div class="layout_container">
     <!--    左侧菜单-->
-    <div class="layout_slider" >
-      <Logo/>
+    <div class="layout_slider">
+      <Logo />
       <el-scrollbar class="scrollbar">
         <el-menu
-            :default-active="$route.path"
-            :collapse="LayoutSettingStore.fold"
-
-            active-text-color="#18784d"
-            background-color="#f4f4f5"
-            text-color="#646469"
+          :default-active="$route.path"
+          :collapse="LayoutSettingStore.fold"
+          active-text-color="#18784d"
+          background-color="#f4f4f5"
+          text-color="#646469"
         >
           <!--          根据路由动态生成菜单-->
-          <Menu :menuList="userStore.menuRoutes"/>
+          <Menu :menuList="userStore.menuRoutes" />
         </el-menu>
       </el-scrollbar>
     </div>
     <!--    顶部导航-->
-    <div class="layout_header" :class="{fold:!!LayoutSettingStore.fold}">
-      <Header/>
+    <div class="layout_header" :class="{ fold: !!LayoutSettingStore.fold }">
+      <Header />
     </div>
     <!--    内容展示-->
-    <div class="layout_main" :class="{fold:!!LayoutSettingStore.fold}">
-      <Main/>
+    <div class="layout_main" :class="{ fold: !!LayoutSettingStore.fold }">
+      <Main />
     </div>
   </div>
 </template>
