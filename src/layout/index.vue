@@ -83,7 +83,7 @@ export default {
   top: 0;
   left: $base-menu-width;
   transition: all 0.3s;
-  background: white;
+  background: #fdfdfd;
 
   &.fold {
     width: calc(100vw - $base-menu-min-width);
@@ -100,7 +100,7 @@ export default {
   padding: 20px;
   overflow: auto;
   transition: all 0.3s;
-  background: white;
+  background: #fdfdfd;
 
   &.fold {
     width: calc(100vw - $base-menu-min-width);
